@@ -1,0 +1,58 @@
+﻿@using PagedList.Mvc
+@using PagedList
+@model PagedList.IPagedList<BTLWeb.Models.Data.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Index</h2>
+
+    <div style="margin-bottom: 20px;">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                FullName
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Photo
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <img src="@Url.Content("~/Content/img/customers/" + item.Photo)" alt="Alternate Text" width="50"/>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.UserName }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.UserName }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.UserName })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    <div class="row">
+        <div class="col" align="center">
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+        </div>
+    </div>
+</div>

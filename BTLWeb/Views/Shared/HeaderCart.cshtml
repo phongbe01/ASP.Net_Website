@@ -1,0 +1,7 @@
+﻿@model List<BTLWeb.Models.Dao.CartItem>
+<div class="header__cart">
+    <ul>
+        <li><a href="@Url.Action("Index", "Cart")"><i class="fa fa-shopping-bag"></i> <span>@Model.Count</span></a></li>
+    </ul>
+    <div class="header__cart__price">item: <span></span></div>
+</div>

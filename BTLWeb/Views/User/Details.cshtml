@@ -1,0 +1,56 @@
+﻿@model BTLWeb.Models.Data.Customer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class=" row">
+            <div class="col-7">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Password)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Password)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Fullname)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Fullname)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+            </div>
+            <div class="col-5">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Photo)
+                </dt>
+
+                <dd>
+                    <img src="@Url.Content("~/Content/img/customers/" + Model.Photo)" alt="Alternate Text" width="90"/>
+                </dd>
+            </div>
+        </div>
+        <div>
+            <p class="btn-outline-info">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.UserName }) 
+            </p>
+        </div>
+    </dl>
+</div>
+

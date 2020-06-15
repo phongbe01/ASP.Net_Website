@@ -1,0 +1,7 @@
+﻿
+@model List<BTLWeb.Models.Data.Category>
+
+@foreach (var item in Model)
+{
+    <li ><a href=@Url.Action("Index", "Product", new { categoryId = item.Id})>@item.NameVN </a></li>
+}

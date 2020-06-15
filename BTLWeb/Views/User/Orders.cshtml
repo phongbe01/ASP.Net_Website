@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BTLWeb.Models.Data.Order>
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="">
+    <h2>Orders</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequireDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Receiver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    <a href="@Url.Action("OrderDetails", "User", new { id = item.Id})">@Html.DisplayFor(modelItem => item.Id)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequireDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Receiver)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div>
+        <a href="@Url.Action( "Index","Home")" class="btn, btn-outline-info">Back</a>
+    </div>
+</div>

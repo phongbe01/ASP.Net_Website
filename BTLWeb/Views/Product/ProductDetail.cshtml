@@ -1,0 +1,97 @@
+﻿@using System.Xml
+@model BTLWeb.Models.Data.Product
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_Default.cshtml";
+    var relatedProducts = ViewBag.RelatedProducts;
+    var qty = 1;
+}
+
+<div class="container">
+    <div class="header">
+        @RenderPage("../Shared/_Header.cshtml")
+    </div>
+    <div class="container">
+        <!-- Product Details Section Begin -->
+        <section class="product-details spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="product__details__pic">
+                            <div class="product__details__pic__item">
+                                <img class="product__details__pic__item--large"
+                                     src="@Url.Content("../../Content/img/products/" + Model.Image)" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="product__details__text">
+                            <h3>@Model.Name</h3>
+                            <div class="product__details__rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                                <span>(@Model.Views views)</span>
+                            </div>
+                            <div class="product__details__price">@Model.UnitPrice $</div>
+                            <p>
+                                @Model.Discount
+                            </p>
+                            <div class="product__details__quantity">
+                                <div class="quantity">
+                                    <div class="pro-qty">
+                                        <input type="text" value="1" id="qty">
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="@Url.Action("AddItem", "Cart", new { productId = Model.Id, quantity = @qty})" class="primary-btn" id="add-to-cart">ADD TO CARD</a>
+                            <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Product Details Section End -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="section-title related__product__title">
+                <h2>Related Product</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-left: 30px;">
+        @foreach (var item in relatedProducts)
+        {
+            <div class="product__item col-" style="margin-right: 30px; margin-bottom: 40px">
+                <div class="product__item__pic set-bg" style="width: 230px; height: 250px;">
+                    <ul class="product__item__pic__hover">
+                        <img class="product__details__pic__item--large" src="@Url.Content("../../Content/img/products/" + item.Image)" alt="">
+                        <li><a href="@Url.Action("ProductDetail", "Product", new {productId = item.Id})"><i class="fa fa-eye"></i></a></li>
+                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="product__item__text">
+                    <h6><a href="#">@item.Name</a></h6>
+                    <h5>@item.UnitPrice $</h5>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="footer">
+        @RenderPage("../Shared/_Footer.cshtml")
+    </div>
+</div>
+
+<script>
+    $('#add-to-cart').click(function() {
+        var qty = $('#qty').val();
+        var id = '@Model.Id';
+        var str = 'Url.Action("AddItem", "Cart", new { productId =' + id + ', quantity = ' + qty + '})';
+        window.location = 'Cart/AddItem/?productId=' + id + '&quantity=' + qty;
+    });
+</script>

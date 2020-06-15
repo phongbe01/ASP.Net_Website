@@ -1,0 +1,39 @@
+﻿@model List<BTLWeb.Models.Data.Product>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin-top: 20px;">
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Search</li>
+        </ol>
+    </nav>
+</div>
+<div class="row">
+    @{
+        foreach (var item in Model)
+        {
+            <div class="product__item" style="margin-right: 30px; margin-bottom: 40px">
+                <div class="product__item__pic set-bg" style="width: 250px; height: 250px;">
+                    <img class="product__details__pic__item--large" src="@Url.Content("../../Content/img/products/" + item.Image)" alt="">
+                    <ul class="product__item__pic__hover">
+                        <li><a href="@Url.Action("ProductDetail", "Product", new {productId = item.Id})"><i class="fa fa-eye"></i></a></li>
+                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                        <li><a href="@Url.Action("AddItem", "Cart", new { productId = item.Id, quantity = 1})"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                </div>
+                    
+                <div class="product__item__text">
+                    <h6><a href="#">@item.Name</a></h6>
+                    <h5>@item.UnitPrice $</h5>
+                </div>
+            </div>
+        }
+
+    }
+</div>
+
+
